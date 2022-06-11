@@ -1,21 +1,34 @@
-import React, { useContext, useState } from 'react'
-import { View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
-import LOCALE_KEY, {
-    getLocale,
-    setLocale,
-    clearLocale,
-} from '../repositories/local/appLocale';
+import React, { useEffect, useState } from 'react'
+import { View, Image, StyleSheet, Text,TouchableOpacity, FlatList } from 'react-native';
+import { api } from '../repositories/network/api';
+import { useSelector, useDispatch } from 'react-redux';
 import { AuthContext } from '../context/AuthContext';
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [data, setData] = useState([]);
     const { login } = '';
+    const dispatch = useDispatch()
+    useEffect(() => {
+        getAptTest1();
+      }, []);
 
-    onLoginClick = async (toggleLoggedIn) =>{
-        await setLocale(LOCALE_KEY.access_token, 'asdfasdfsadfasd23');
-        await toggleLoggedIn();
-    }
+      const  getAptTest1=()=>{
+        api.getTypicode( dispatch,(data) => {
+            setData(data)
+          });
+      }
+      const renderItem = ({ item }) => (
+        <Item title={item.title} />
+       
+      );
+
+      const Item = ({ title }) => (
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.title}>{title}</Text>
+        </TouchableOpacity>
+      );
+
     return (
         <AuthContext.Consumer>
             {({ isLoggedIn, toggleLoggedIn }) => (
@@ -23,6 +36,11 @@ const LoginScreen = ({ navigation }) => {
                     <View style={{ alignItems: 'center' }} >
                         <Image style={{ width: 200, height: 200, resizeMode: 'contain' }} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQsX9T0dQcbVzbu8ssxwM0INCkJNXHXe8-GgQ&usqp=CAU' }} />
                     </View>
+                    <FlatList
+                    data={data}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    />
                   
 
                 </View>
@@ -31,4 +49,18 @@ const LoginScreen = ({ navigation }) => {
     )
 }
 
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    item: {
+      backgroundColor: '#f9c2ff',
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 16,
+    },
+    title: {
+      fontSize: 22,
+    },
+  });
 export default LoginScreen;

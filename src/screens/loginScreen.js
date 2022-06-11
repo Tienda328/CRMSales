@@ -15,10 +15,14 @@ const LoginScreen = ({ navigation }) => {
     const { login } = '';
     const dispatch = useDispatch()
     useEffect(() => {
-        api.getTest( dispatch,(data) => {
-            // console.log('sssw',data)
-          });
+        getAptTest();
       }, []);
+
+    const  getAptTest=()=>{
+        api.getTest( dispatch,(data) => {
+            console.log('sssw',data)
+          });
+      }
 
 
     onLoginClick = async (toggleLoggedIn) =>{

@@ -1,5 +1,5 @@
 const configs = {
-  HOST: 'https://appkh.tienngay.vn/',
+  HOST: 'https://api.achamcong.net/',
 };
 
 export default configs;

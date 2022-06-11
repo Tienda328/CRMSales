@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
 import LOCALE_KEY, {
     getLocale,
@@ -6,11 +6,20 @@ import LOCALE_KEY, {
     clearLocale,
 } from '../repositories/local/appLocale';
 import { AuthContext } from '../context/AuthContext';
-
+import { api } from '../repositories/network/api';
+import { useSelector, useDispatch } from 'react-redux';
+import {connect} from 'react-redux';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const { login } = '';
+    const dispatch = useDispatch()
+    useEffect(() => {
+        api.getTest( dispatch,(data) => {
+            // console.log('sssw',data)
+          });
+      }, []);
+
 
     onLoginClick = async (toggleLoggedIn) =>{
         await setLocale(LOCALE_KEY.access_token, 'asdfasdfsadfasd23');
@@ -81,4 +90,13 @@ const LoginScreen = ({ navigation }) => {
     )
 }
 
-export default LoginScreen;
+  function mapStateToProps  (state)   {
+    return {
+        appState: state.appState,
+    };
+  };
+  function mapDispatchToProps (dispatch)   {
+    return {
+    };
+  };
+export default connect(mapStateToProps,mapDispatchToProps)(LoginScreen);

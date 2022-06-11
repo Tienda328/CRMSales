@@ -1,5 +1,4 @@
 const colors = {
-  // colors configs
   transparent: 'transparent',
   white: '#FFF',
   black: '#000',

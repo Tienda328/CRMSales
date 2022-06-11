@@ -14,6 +14,8 @@ import LOCALE_KEY, {
   setLocale,
   clearLocale,
 } from '../repositories/local/appLocale';
+import {connect} from 'react-redux';
+import LoadingComponent from '../components/LoadingComponent';
 export let navigationRef = React.createRef();
 
 class MainNavigator extends React.Component {
@@ -78,10 +80,10 @@ class MainNavigator extends React.Component {
     );
   };
 
-  //   renderLoading = () => {
-  //   const {appState} = this.props;
-  //   return <LoadingComponent modalVisible={appState.isLoading} />;
-  // };
+    renderLoading = () => {
+    const {appState} = this.props;
+    return <LoadingComponent modalVisible={appState.isLoading} />;
+  };
 
   render() {
     if (this.state.openApp !== true ) {
@@ -92,7 +94,7 @@ class MainNavigator extends React.Component {
       <NavigationContainer ref={navigationRef}>
             <StatusBar barStyle="dark-content" backgroundColor="white" />
             {this.renderNavigator()}
-              {/* {this.renderLoading()} */}
+            {this.renderLoading()}
           </NavigationContainer>
   </AuthContext.Provider>
       
@@ -100,4 +102,14 @@ class MainNavigator extends React.Component {
   }
 }
 
-export default MainNavigator;
+
+MainNavigator.defaultProps = {
+  appState: {},
+};
+
+const mapStateToProps = (state) => ({
+  appState: state.appState,
+});
+
+export default connect(mapStateToProps,null)(MainNavigator);
+

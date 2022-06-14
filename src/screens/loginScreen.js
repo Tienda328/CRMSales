@@ -1,106 +1,176 @@
 import React, { useEffect, useState } from 'react'
-import { View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, Image, TextInput, Text, TouchableOpacity, SafeAreaView, StyleSheet } from 'react-native';
 import LOCALE_KEY, {
     getLocale,
     setLocale,
     clearLocale,
 } from '../repositories/local/appLocale';
 import { AuthContext } from '../context/AuthContext';
+import LinearGradient from 'react-native-linear-gradient';
 import { api } from '../repositories/network/api';
 import { useSelector, useDispatch } from 'react-redux';
-import {connect} from 'react-redux';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { connect } from 'react-redux';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [isEye, setIsEye] = useState(false);
     const { login } = '';
     const dispatch = useDispatch()
-    useEffect(() => {
-        getAptTest();
-      }, []);
+    // useEffect(() => {
+    //     getAptTest();
+    //   }, []);
 
-    const  getAptTest=()=>{
-        api.getTest( dispatch,(data) => {
-            console.log('sssw',data)
-          });
-      }
+    // const  getAptTest=()=>{
+    //     api.getTest( dispatch,(data) => {
+    //         console.log('sssw',data)
+    //       });
+    //   }
+
+    const onClinkEye = () => {
+        setIsEye(!isEye)
+    }
 
 
-    onLoginClick = async (toggleLoggedIn) =>{
+    const onLoginClick = async (toggleLoggedIn) => {
         await setLocale(LOCALE_KEY.access_token, 'asdfasdfsadfasd23');
         await toggleLoggedIn();
     }
     return (
         <AuthContext.Consumer>
             {({ isLoggedIn, toggleLoggedIn }) => (
-                <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center' }} >
-                    <View style={{ alignItems: 'center' }} >
-                        <Image style={{ width: 200, height: 200, resizeMode: 'contain' }} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQsX9T0dQcbVzbu8ssxwM0INCkJNXHXe8-GgQ&usqp=CAU' }} />
+                <View style={{ flex: 1 }}>
+                    <Image style={{ position: 'absolute', height: '100%', width: '100%' }} source={{ uri: 'https://designimages.appypie.com/appbackground/appbackground-19-nature-outdoors.jpg' }} />
+                    <View style={{ marginLeft: 16, flex: 1, marginTop: 50 }} >
+                        <Image style={{ width: 100, height: 100, resizeMode: 'contain' }} source={{ uri: 'https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn' }} />
+                        <Text style={styles.txtWelcome}>Welcome Back,</Text>
+                        <Text style={styles.txtToContinue}>Sign in to  continue</Text>
                     </View>
-                    <Text style={{ marginLeft: 16, fontSize: 25, fontWeight: '600', marginVertical: 10 }} >Email: </Text>
-                    <TextInput style={{
-                        padding: 10,
-                        borderWidth: 1,
-                        marginHorizontal: 16,
-                        borderRadius: 6,
-                        fontSize: 16,
-                        color: '#333',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                        numberOfLines={1}
-                        labelValue={email}
-                        onChangeText={(userEmail) => setEmail(userEmail)}
-                        placeholderText="Email"
-                        iconType="user"
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                    />
-                    <Text style={{ marginLeft: 16, fontSize: 25, fontWeight: '600', marginVertical: 10 }} >PassWord: </Text>
-                    <TextInput style={{
-                        padding: 10,
-                        borderWidth: 1,
-                        marginHorizontal: 16,
-                        borderRadius: 6,
-                        fontSize: 16,
-                        color: '#333',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                        labelValue={password}
-                        onChangeText={(userPassword) => setPassword(userPassword)}
-                        placeholderText="Password"
-                        iconType="lock"
-                        secureTextEntry={true}
-                    />
+                    <View style={{ flex: 2, marginTop: 30, justifyContent: 'center' }}>
 
-                    <TouchableOpacity
-                        style={{
-                            backgroundColor: 'blue', height: 48, marginHorizontal: 16, justifyContent: 'center', alignItems: 'center', marginVertical: 16,
-                            borderRadius: 6
-                        }}
-                        onPress={() => this.onLoginClick(toggleLoggedIn)}
-                    >
-                        <Text style={{ fontWeight: '600', fontSize: 25, color: '#fff' }} >Login</Text>
-                    </TouchableOpacity>
+                        <View style={styles.ViewTexInput}>
+                            <MaterialCommunityIcons name={'account'} size={25} style={styles.imgIcon} />
+                            <TextInput
+                                style={styles.txtTextInput}
+                                labelValue={email}
+                                onChangeText={(userEmail) => setEmail(userEmail)}
+                                placeholderText="Email"
+                                placeholder='Nhập tài khoản'
+                            />
+                        </View>
+                        <View style={styles.ViewTexInput}>
+                            <MaterialCommunityIcons name={'lock'} size={25} style={styles.imgIcon} />
+                            <TextInput
+                                style={styles.txtTextInput}
+                                labelValue={password}
+                                onChangeText={(userPassword) => setPassword(userPassword)}
+                                placeholderText="Password"
+                                iconType="lock"
+                                placeholder='Nhập mật khẩu'
+                                secureTextEntry={isEye}
+                            />
+                            <TouchableOpacity style={styles.bntEye}
+                                onPress={() => onClinkEye()}
+                            >
+                                <MaterialCommunityIcons name={isEye ? 'eye-off' : 'eye'} size={20} style={styles.imgIconEye} />
+                            </TouchableOpacity>
 
-                    <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => navigation.navigate('SignupScreen')} >
-                        <Text style={{ fontSize: 25, color: '#04B404' }} >Đăng Ký</Text>
-                    </TouchableOpacity>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 20, marginRight: 30 }}>
+                            <View style={{ flex: 1 }} />
+                            <TouchableOpacity>
+                                <Text>Forgot PassWord?</Text>
+                            </TouchableOpacity>
+                        </View>
 
+                        <TouchableOpacity
+                            onPress={() => onLoginClick(toggleLoggedIn)}
+                        >
+                            <LinearGradient
+                                colors={['#2E9AFE', '#0080FF', '#2E9AFE']}
+                                style={styles.signIn}>
+                                <Text style={styles.txtLogin} >Login</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+
+
+                    </View>
+                    <View style={{ flex: 1, }}>
+                        <View style={{ flex: 1 }} />
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 50, }}>
+                            <Text style={{ fontSize: 13 }} >New User? </Text>
+                            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => navigation.navigate('SignupScreen')} >
+                                <Text style={{ fontWeight: 'bold',color:'#0174DF', fontStyle:'italic',textDecorationLine: 'underline'} } >Singup</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
             )}
         </AuthContext.Consumer>
     )
 }
 
-  function mapStateToProps  (state)   {
+
+const styles = StyleSheet.create({
+    txtWelcome: {
+        fontWeight: 'bold',
+        // fontFamily:'',
+        marginTop: 20,
+        fontSize: 30
+    },
+    txtToContinue: {
+        fontSize: 16,
+        marginTop: 10
+    },
+    signIn: {
+        paddingVertical: 15,
+        marginHorizontal: 15,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    txtLogin: {
+        fontWeight: '600',
+        fontSize: 18,
+        color: '#fff',
+        fontWeight: 'bold'
+    },
+    txtTextInput: {
+        flex: 1,
+        paddingVertical: 18,
+        borderRadius: 6,
+        paddingRight: 10,
+        fontSize: 13,
+        // color: '#333',
+    },
+    imgIcon: {
+        color: '#0174DF',
+        marginHorizontal: 10
+    },
+    imgIconEye: {
+
+    },
+    ViewTexInput: {
+        flexDirection: 'row',
+        marginTop: 30,
+        borderRadius: 40,
+        backgroundColor: 'white',
+        marginHorizontal: 16,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    bntEye: {
+        marginRight: 14
+    }
+
+});
+function mapStateToProps(state) {
     return {
         appState: state.appState,
     };
-  };
-  function mapDispatchToProps (dispatch)   {
+};
+function mapDispatchToProps(dispatch) {
     return {
     };
-  };
-export default connect(mapStateToProps,mapDispatchToProps)(LoginScreen);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

@@ -31,25 +31,3 @@ instance.interceptors.request.use(async (request) => {
   };
   return request;
 });
-
-export function checkVersion(params) {
-  var instance1 = axios.create({
-    baseURL: HOST,
-    timeout: 80000,
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-    },
-  });
-  return instance1.post(`https://api.achamcong.net/api/check_version?version=${params.version}&app=${params.app}`)
-}
-
-export function getTest() {
-  return instance.get('https://reactnative.dev/movies.json');
-}
-
-export function getTypicode() {
-  return instance.get('https://jsonplaceholder.typicode.com/posts');
-}

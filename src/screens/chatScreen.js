@@ -92,7 +92,7 @@ const ChatScreen = ({ navigation }) => {
         onPress={()=>navigation.navigate('MessagesScreen', {item})}
         style={{ marginRight: 20, justifyContent: 'center', alignItems: 'center', }}>
             <View style={{ alignItems: 'center', }}>
-                <Image style={{ height: 50, width: 50, resizeMode: 'stretch', borderRadius: 25 }} source={{ uri: item.image }} />
+                <Image style={{ height: 50, width: 50, resizeMode: 'center', borderRadius: 25 }} source={{ uri: item.image }} />
                 {item.timeStart === 0 ? <View style={{ position: 'absolute', justifyContent: 'center', alignItems: 'center', width: 16, bottom: -1, right: 3, height: 16, borderRadius: 8, backgroundColor: 'white' }}>
                     <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: '#01DF01' }} />
                 </View> : null}
@@ -112,7 +112,7 @@ const ChatScreen = ({ navigation }) => {
         onPress={()=>navigation.navigate('MessagesScreen', {item})}
         >
             <View style={{ alignItems: 'center', marginHorizontal: 10 }}>
-                <Image style={{ height: 50, width: 50, resizeMode: 'stretch', borderRadius: 25 }} source={{ uri: item.image }} />
+                <Image style={{ height: 50, width: 50, resizeMode: 'center', borderRadius: 25 }} source={{ uri: item.image }} />
                 {item.timeStart === 0? <View style={{ position: 'absolute', justifyContent: 'center', alignItems: 'center', width: 16, bottom: -1, right: 3, height: 16, borderRadius: 8, backgroundColor: 'white' }}>
                     <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: '#01DF01' }} />
                 </View> : null}
@@ -131,7 +131,7 @@ const ChatScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', }} >
             <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                <Image style={{ height: 30, width: 30, resizeMode: 'stretch', borderRadius: 15, marginLeft: 10 }} source={{ uri: 'https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-1/276296359_2801250510021779_7949528195487827599_n.jpg?stp=dst-jpg_p200x200&_nc_cat=100&ccb=1-7&_nc_sid=7206a8&_nc_ohc=sE5lSjytpD0AX9DebrJ&_nc_ht=scontent.fhan14-2.fna&oh=00_AT9Gs5WuZ7h52Etr9oCKv5KEY7p0DRLf9DU2PoWuVpv6Kw&oe=62AD900F' }} />
+                <Image style={{ height: 30, width: 30, resizeMode: 'center', borderRadius: 15, marginLeft: 10 }} source={{ uri: 'https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-1/276296359_2801250510021779_7949528195487827599_n.jpg?stp=dst-jpg_p200x200&_nc_cat=100&ccb=1-7&_nc_sid=7206a8&_nc_ohc=sE5lSjytpD0AX9DebrJ&_nc_ht=scontent.fhan14-2.fna&oh=00_AT9Gs5WuZ7h52Etr9oCKv5KEY7p0DRLf9DU2PoWuVpv6Kw&oe=62AD900F' }} />
                 <Text style={{ fontSize: 25, marginLeft: 10, fontWeight: 'bold', flex: 1, paddingVertical: 10 }}>Đoạn chat</Text>
                 <View style={{ height: 30, width: 30, borderRadius: 15, backgroundColor: '#E6E6E6', justifyContent: 'center', alignItems: 'center' }}>
                     <MaterialCommunityIcons name={'camera'} size={18} color='#000' />

@@ -16,6 +16,8 @@ const colors = {
   buttonGreen: '#20B056',
   darkBackground: '#2d3436',
   lightgrey: 'lightgrey',
+  colorAll:'#000',
+  colorBackgroudNen:'#E1E8EB'
 };
 
 export default colors;

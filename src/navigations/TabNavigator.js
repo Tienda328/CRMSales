@@ -5,7 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/homeScreen';
 import ProFileScreen from '../screens/proFileScreen';
 import MarketPlaceScreen from '../screens/marketPlaceScreen';
+import colors from '../constants/colors';
 import ChatScreen from '../screens/chatScreen';
+import ReportScreen from '../screens/reportScreen';
 
 const styles = StyleSheet.create({
   tabbarItemCenter: {
@@ -46,17 +48,17 @@ class TabNavigator extends React.Component {
   tabbarIcon = (route, focused, color, size) => {
     let iconName; if (route.name === 'Profile') {
       iconName = focused ? 'menu' : 'menu';
-    } else if (route.name === 'MarketPlace') {
-      iconName = focused ? 'shopping' : 'shopping';
+    } else if (route.name === 'Report') {
+      iconName = focused ? 'chart-bar-stacked' : 'chart-bar-stacked';
     } else if (route.name === 'HomeCustomer') {
       iconName = focused ? 'home' : 'home';
     } else if (route.name === 'ChatScreen') {
       iconName = focused ? 'message' : 'message';
-    } 
+    }
     else if (route.name === 'AddKey') {
       return (
         <View style={styles.tabbarItemCenter}>
-          {focused ? <MaterialCommunityIcons name={'alarm-plus'} size={30} color={'#fff'} /> : <MaterialCommunityIcons name={'alarm-plus'} size={30} color={'#fff'} />}
+          {focused ? <MaterialCommunityIcons name={'alarm-plus'} size={26} color={'#fff'} /> : <MaterialCommunityIcons name={'alarm-plus'} size={30} color={'#fff'} />}
         </View>
       );
     }
@@ -64,27 +66,25 @@ class TabNavigator extends React.Component {
   }
 
   tabBarLabel = (route, focused, color, size) => {
-    let routeName;if (route.name === 'Profile') {
-      color = focused ? '#F7941D' : '#A4A4A4'
+    let routeName; if (route.name === 'Profile') {
+      color = focused ? colors.colorAll : '#BEBEBE'
       routeName = 'Menu';
-    } else if (route.name === 'MarketPlace') {
-      color = focused ? '#F7941D' : '#A4A4A4'
-      routeName = 'MarketPlace';
+    } else if (route.name === 'Report') {
+      color = focused ? colors.colorAll : '#BEBEBE'
+      routeName = 'Báo cáo';
     } else if (route.name === 'ChatScreen') {
-      color = focused ? '#F7941D' : '#A4A4A4'
+      color = focused ? colors.colorAll : '#BEBEBE'
       routeName = 'Chat';
     }
     else if (route.name === 'HomeCustomer') {
-      color = focused ? '#F7941D' : '#A4A4A4'
+      color = focused ? colors.colorAll : '#BEBEBE'
       routeName = 'Trang chủ';
     }
-    return <Text style={{ color: color, fontSize:11, fontWeight:'400' }}>{routeName}</Text>
+    return <Text style={{ color: color, fontSize: 11, fontWeight: '600' }}>{routeName}</Text>
   }
 
-
-
   render() {
-   
+
     return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -94,25 +94,26 @@ class TabNavigator extends React.Component {
           tabBarLabel: ({ focused, color, size }) => {
             return this.tabBarLabel(route, focused, color, size);
           },
-          tabBarActiveTintColor: '#FF8000',
-          tabBarInactiveTintColor: '#A4A4A4',
+          tabBarActiveTintColor: colors.colorAll,
+          tabBarInactiveTintColor: '#BEBEBE',
           headerShown: false,
 
-        })}>
+        })}
+      >
         <Tab.Screen name="HomeCustomer" component={HomeScreen} options={{
           tabBarVisible: false
         }} />
-         <Tab.Screen name="MarketPlace" component={MarketPlaceScreen} options={{
+        <Tab.Screen name="Report" component={ReportScreen} options={{
           tabBarVisible: false
         }} />
-          <Tab.Screen name="ChatScreen" component={ChatScreen} options={{
+        <Tab.Screen name="ChatScreen" component={ChatScreen} options={{
           tabBarVisible: false
         }} />
         <Tab.Screen name="Profile" component={ProFileScreen} />
       </Tab.Navigator>
     )
 
-    
+
   }
 
 }

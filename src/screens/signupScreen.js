@@ -7,6 +7,7 @@ import LOCALE_KEY, {
 } from '../repositories/local/appLocale';
 import { AuthContext } from '../context/AuthContext';
 import LinearGradient from 'react-native-linear-gradient';
+import colors  from '../constants/colors';
 import { api } from '../repositories/network/api';
 import { useSelector, useDispatch } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -27,17 +28,17 @@ const SignUpScreen = ({ navigation }) => {
     //   }
 
 
-    const onLogin=()=>{
+    const onLogin = () => {
         console.log('ssss')
         // navigation.navigate('LoginScreen')
     }
     return (
         <AuthContext.Consumer>
             {({ isLoggedIn, toggleLoggedIn }) => (
-                <View style={{ flex: 1 }}>
-                    <Image style={{ position: 'absolute', height: '100%', width: '100%' }} source={{ uri: 'https://designimages.appypie.com/appbackground/appbackground-19-nature-outdoors.jpg' }} />
+                <View style={{ flex: 1, backgroundColor: colors.colorBackgroudNen }}>
+                    {/* <Image style={{ position: 'absolute', height: '100%', width: '100%' }} source={{ uri: 'https://designimages.appypie.com/appbackground/appbackground-19-nature-outdoors.jpg' }} /> */}
                     <View style={{ marginLeft: 16, flex: 1, marginTop: 50 }} >
-                        <Image style={{ width: 100, height: 100, resizeMode: 'contain' }} source={{ uri: 'https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn' }} />
+                        <Image style={{ width: 100, height: 100,borderRadius:10, resizeMode: 'contain' }} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD-0L7CJ1biaLHo2SL-71j6H5I-QPAHqBn7WW9eokSe6ber51W9niawJ77L9zw87O3-mw&usqp=CAU' }} />
                         <Text style={styles.txtWelcome}>SingUp</Text>
                         <Text style={styles.txtToContinue}>Register a new account</Text>
                     </View>
@@ -75,10 +76,10 @@ const SignUpScreen = ({ navigation }) => {
                         </View>
 
                         <TouchableOpacity
-                           onPress={()=>onLogin()}
+                            onPress={() => onLogin()}
                         >
                             <LinearGradient
-                                colors={['#2E9AFE', '#0080FF', '#2E9AFE']}
+                                colors={['#100F0F', '#100F0F', '#100F0F']}
                                 style={styles.signIn}>
                                 <Text style={styles.txtLogin} >SignUp</Text>
                             </LinearGradient>
@@ -88,10 +89,10 @@ const SignUpScreen = ({ navigation }) => {
                     </View>
                     <View style={{ flex: 1, }}>
                         <View style={{ flex: 1 }} />
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 50, }}>
-                            <Text style={{ fontSize: 13 }} >Log in to your account here.</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 50, }}>
+                            <Text style={{ fontSize: 12 }} >Log in to your account here.</Text>
                             <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => navigation.goBack()} >
-                                <Text style={{ fontWeight: 'bold',color:'#0174DF' }} >Singin</Text>
+                                <Text style={{ fontWeight: 'bold', fontSize: 15, color: '#2666CF', }} >Singin</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -107,14 +108,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         // fontFamily:'',
         marginTop: 20,
+        color: colors.colorAll,
         fontSize: 30
     },
     txtToContinue: {
         fontSize: 16,
-        marginTop: 10
+        marginTop: 10,
+        color: colors.colorAll
     },
     signIn: {
-        marginTop:30,
+        marginTop: 30,
         paddingVertical: 15,
         marginHorizontal: 15,
         borderRadius: 10,
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
         // color: '#333',
     },
     imgIcon: {
-        color: '#0174DF',
+        color: colors.colorAll,
         marginHorizontal: 10
     },
     imgIconEye: {

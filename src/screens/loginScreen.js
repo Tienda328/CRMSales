@@ -9,12 +9,13 @@ import { AuthContext } from '../context/AuthContext';
 import LinearGradient from 'react-native-linear-gradient';
 import { api } from '../repositories/network/api';
 import { useSelector, useDispatch } from 'react-redux';
+import colors  from '../constants/colors';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [isEye, setIsEye] = useState(false);
+    const [isEye, setIsEye] = useState(true);
     const { login } = '';
     const dispatch = useDispatch()
     // useEffect(() => {
@@ -39,10 +40,10 @@ const LoginScreen = ({ navigation }) => {
     return (
         <AuthContext.Consumer>
             {({ isLoggedIn, toggleLoggedIn }) => (
-                <View style={{ flex: 1 }}>
-                    <Image style={{ position: 'absolute', height: '100%', width: '100%' }} source={{ uri: 'https://designimages.appypie.com/appbackground/appbackground-19-nature-outdoors.jpg' }} />
+                <View style={{ flex: 1, backgroundColor:colors.colorBackgroudNen }}>
+                    {/* <Image style={{ position: 'absolute', height: '100%', width: '100%' }} source={{ uri: 'https://designimages.appypie.com/appbackground/appbackground-19-nature-outdoors.jpg' }} /> */}
                     <View style={{ marginLeft: 16, flex: 1, marginTop: 50 }} >
-                        <Image style={{ width: 100, height: 100, resizeMode: 'contain' }} source={{ uri: 'https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn' }} />
+                        <Image style={{ width: 100, height: 100,borderRadius:10, resizeMode: 'contain' }} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD-0L7CJ1biaLHo2SL-71j6H5I-QPAHqBn7WW9eokSe6ber51W9niawJ77L9zw87O3-mw&usqp=CAU' }} />
                         <Text style={styles.txtWelcome}>Welcome Back,</Text>
                         <Text style={styles.txtToContinue}>Sign in to  continue</Text>
                     </View>
@@ -72,22 +73,22 @@ const LoginScreen = ({ navigation }) => {
                             <TouchableOpacity style={styles.bntEye}
                                 onPress={() => onClinkEye()}
                             >
-                                <MaterialCommunityIcons name={isEye ? 'eye-off' : 'eye'} size={20} style={styles.imgIconEye} />
+                                <MaterialCommunityIcons name={isEye ? 'eye-off': 'eye'} size={20} style={styles.imgIconEye} />
                             </TouchableOpacity>
 
                         </View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 20, marginRight: 30 }}>
+                        {/* <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 20, marginRight: 30 }}>
                             <View style={{ flex: 1 }} />
                             <TouchableOpacity>
-                                <Text>Forgot PassWord?</Text>
+                                <Text style={{color:'#fff', fontWeight:'bold'}}>Forgot PassWord?</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
 
                         <TouchableOpacity
                             onPress={() => onLoginClick(toggleLoggedIn)}
                         >
                             <LinearGradient
-                                colors={['#2E9AFE', '#0080FF', '#2E9AFE']}
+                                colors={['#100F0F', '#100F0F', '#100F0F']}
                                 style={styles.signIn}>
                                 <Text style={styles.txtLogin} >Login</Text>
                             </LinearGradient>
@@ -97,10 +98,10 @@ const LoginScreen = ({ navigation }) => {
                     </View>
                     <View style={{ flex: 1, }}>
                         <View style={{ flex: 1 }} />
-                        <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 50, }}>
-                            <Text style={{ fontSize: 13 }} >New User? </Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center',alignItems:'center', marginBottom: 50, }}>
+                            <Text style={{ fontSize: 12 }} >New User? </Text>
                             <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => navigation.navigate('SignupScreen')} >
-                                <Text style={{ fontWeight: 'bold',color:'#0174DF', fontStyle:'italic',textDecorationLine: 'underline'} } >Singup</Text>
+                                <Text style={{ fontWeight: 'bold',fontSize:15,color:'#2666CF', fontStyle:'italic',textDecorationLine: 'underline'} } >Singup</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -116,15 +117,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         // fontFamily:'',
         marginTop: 20,
-        fontSize: 30
+        fontSize: 30,
+        color:colors.colorAll
     },
     txtToContinue: {
         fontSize: 16,
-        marginTop: 10
+        marginTop: 10,
+        color:colors.colorAll
     },
     signIn: {
         paddingVertical: 15,
         marginHorizontal: 15,
+        marginTop:30,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center'
@@ -137,18 +141,19 @@ const styles = StyleSheet.create({
     },
     txtTextInput: {
         flex: 1,
+marginHorizontal:10,
         paddingVertical: 18,
         borderRadius: 6,
-        paddingRight: 10,
         fontSize: 13,
         // color: '#333',
     },
     imgIcon: {
-        color: '#0174DF',
-        marginHorizontal: 10
+        color: colors.colorAll,
+        marginLeft:16,
+        paddingVertical:5
     },
     imgIconEye: {
-
+      color:  colors.colorAll
     },
     ViewTexInput: {
         flexDirection: 'row',
